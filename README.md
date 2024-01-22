@@ -4,7 +4,7 @@
 
 Server Duels is a Discord bot that allows you to duel your friends in turn-based combat.
 - [Wiki](https://github.com/domhankle/server-duels/wiki)
-- License path
+- [License](server-duels/LICENSE.md)
 
 ## Features
 Server Duels plans to feature turn-based text combat between members of a discord server. Over
