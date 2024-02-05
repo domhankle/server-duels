@@ -5,9 +5,11 @@ bashrcPath=/home/$USER/.bashrc
 devDirPath=/home/$USER/dev
 serverDuelsDirPath=${devDirPath}/server-duels
 
-#getDependencies(){
-    #Awaiting Vic's dependency script for this function.
-#}
+#Get the required system dependencies for Server Duels
+getDependencies(){
+    chmod +x get_dependencies.sh
+    ./get_dependencies.sh
+}
 
 #Append Environmental Variables used for development to .bashrc file.
 initializeEnvVars(){
@@ -31,7 +33,7 @@ initializeEnvVars(){
 }
 
 #Get system level dependencies (python3, pip, etc.)
-#getDependencies
+getDependencies
 
 #Initialize variables.
 initializeEnvVars
