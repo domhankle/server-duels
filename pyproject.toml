@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "server-duels"
+version = "0.2"
+description = "A Discord bot to duel your friends"
+authors = ["Domenic Hankle", "Victor Londono"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+discord.py = "^2.3"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
