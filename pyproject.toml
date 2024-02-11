@@ -8,8 +8,6 @@ authors = ["Domenic Hankle", "Victor Londono"]
 python = "^3.10"
 discord.py = "^2.3"
 
-[tool.poetry.dev-dependencies]
-
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
