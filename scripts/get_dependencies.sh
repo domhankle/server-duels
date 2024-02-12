@@ -12,3 +12,6 @@ pip3 --version
 
 # pip install poetry
 pip install poetry
+
+# Verify installation
+poetry --version
