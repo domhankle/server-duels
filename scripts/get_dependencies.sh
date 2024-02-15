@@ -9,3 +9,10 @@ sudo apt install -y python3 python3-pip
 # Verify installation
 python3 --version
 pip3 --version
+
+# pip install poetry
+pip install poetry
+
+# Verify installation
+poetry --version
+
