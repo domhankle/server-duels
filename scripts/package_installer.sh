@@ -8,7 +8,7 @@ distDir=$SERVER_DUELS_DIR
 makeRCDir(){
     cd $SERVER_DUELS_DIR
 
-    if [ -z "$releaseCandidateNumber" ]; then
+    if [ -n "$releaseCandidateNumber" ]; then
         echo "Generating installer directories for RC${releaseCandidateNumber}..."
         distDir=${SERVER_DUELS_DIR}/rc/${version}/RC${releaseCandidateNumber}
     else
@@ -26,7 +26,7 @@ makeDebDirs(){
 }
 
 # If a version isn't provided, then stop execution.
-if [ -z $version ]; then
+if [ -z "$version" ]; then
     echo "You must provide a version for this installer!"
     exit -1;
 fi
