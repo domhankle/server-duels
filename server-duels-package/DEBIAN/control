@@ -1,0 +1,8 @@
+Package: my-discord-bot
+Version: 1.0
+Section: utils
+Priority: optional
+Architecture: all
+Depends: python3, pip
+Maintainer: Your Name <your@email.com>
+Description: A Discord bot created with Python.
