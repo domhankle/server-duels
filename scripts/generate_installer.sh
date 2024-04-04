@@ -57,6 +57,17 @@ makeControlFile(){
     printf "Description: ${description}\n" >> control
 }
 
+# Populate the $packageDir/usr/local/bin directory
+populateBinDir(){
+    echo "Populating binary directory with source files..."
+
+    cd $SERVER_DUELS_DIR
+
+    cp poetry.lock ${packageDir}/usr/local/bin
+    cp pyproject.toml ${packageDir}/usr/local/bin
+    cp -r server-duels ${packageDir}/usr/local/bin
+}
+
 # Build the deb file
 buildPackage(){
     echo "Building deb package..."
@@ -84,7 +95,9 @@ fi
 makeRCDir
 makeDebStructure
 makeControlFile
+populateBinDir
 buildPackage
 cleanUp
+
 
 echo "${packageName} installer generated at ${distDir}"
