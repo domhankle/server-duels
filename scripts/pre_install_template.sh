@@ -1,6 +1,13 @@
 #!/usr/bin/env bash
 
 configDir=/etc/opt/server-duels
+symbolicLink=/usr/bin/run-server-duels
+
+echo "Checkin for run-server-duels symbolic link..."
+if [ -e $symbolicLink ]; then
+    echo "Removing symbolic link from previous installation..."
+    sudo rm -r $symbolicLink
+fi
 
 echo "Checking for previous Server Duels configuration..."
 if [ -d $configDir ]; then

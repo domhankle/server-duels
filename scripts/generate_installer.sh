@@ -14,10 +14,10 @@ makeRCDir(){
 
     if [ -n "$releaseCandidateNumber" ]; then
         echo "Generating installer directories for v${version} RC${releaseCandidateNumber}..."
-        distDir=${SERVER_DUELS_DIR}/bin/${version}/RC${releaseCandidateNumber}
+        distDir=${SERVER_DUELS_DIR}/dist/${version}/RC${releaseCandidateNumber}
     else
         echo "Generating installer directories for Server Duels v${version}..."
-        distDir=${SERVER_DUELS_DIR}/bin/${version}
+        distDir=${SERVER_DUELS_DIR}/dist/${version}
     fi
 
     mkdir -p $distDir
@@ -69,15 +69,32 @@ makePreinstScript(){
     cat ${SERVER_DUELS_DIR}/scripts/pre_install_template.sh > preinst
 }
 
+# Create a debian postinst file with the post install script template.
+makePostinstScript(){
+    echo "Generating post-install script..."
+    cd $debDir
+    touch postinst
+    chmod +x postinst
+
+    cat ${SERVER_DUELS_DIR}/scripts/post_install_template.sh > postinst
+}
+
 # Populate the $packageDir/usr/local/bin directory
 populateBinDir(){
     echo "Populating binary directory with source files..."
 
     cd $SERVER_DUELS_DIR
 
-    cp poetry.lock ${packageBinDir}
-    cp pyproject.toml ${packageBinDir}
     cp -r server-duels ${packageBinDir}
+
+    echo "Building executable..."
+    cd $packageBinDir
+
+    pyinstaller server-duels/server-duels.py
+    rm -r server-duels*
+    rm -r build
+    mv dist/server-duels .
+    rm -r dist
 }
 
 # Build the deb file
@@ -104,11 +121,16 @@ if [ -z "$version" ]; then
     exit -1;
 fi
 
+# We will use pyinstaller module to create an executable.
+echo "Ensuring pyinstaller module is installed..."
+pip install pyinstaller
+
 makeRCDir
 makeDebStructure
 makeControlFile
 populateBinDir
 makePreinstScript
+makePostinstScript
 buildPackage
 cleanUp
 
