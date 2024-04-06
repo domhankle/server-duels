@@ -8,7 +8,7 @@ packageBinDir=""
 debDir=""
 packageName=""
 
-# Create an rc/dist directory
+# Create a /dist directory
 makeRCDir(){
     cd $SERVER_DUELS_DIR
 
@@ -79,6 +79,16 @@ makePostinstScript(){
     cat ${SERVER_DUELS_DIR}/scripts/post_install_template.sh > postinst
 }
 
+# Create a debian prerm file with pre remove script template.
+makePrermScript(){
+    echo "Generating uninstall script..."
+    cd $debDir
+    touch prerm
+    chmod +x prerm
+
+    cat ${SERVER_DUELS_DIR}/scripts/pre_remove_template.sh > prerm
+}
+
 # Populate the $packageDir/usr/local/bin directory
 populateBinDir(){
     echo "Populating binary directory with source files..."
@@ -131,6 +141,7 @@ makeControlFile
 populateBinDir
 makePreinstScript
 makePostinstScript
+makePrermScript
 buildPackage
 cleanUp
 
