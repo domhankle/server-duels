@@ -13,10 +13,10 @@ makeRCDir(){
 
     if [ -n "$releaseCandidateNumber" ]; then
         echo "Generating installer directories for v${version} RC${releaseCandidateNumber}..."
-        distDir=${SERVER_DUELS_DIR}/${version}/RC${releaseCandidateNumber}
+        distDir=${SERVER_DUELS_DIR}/bin/${version}/RC${releaseCandidateNumber}
     else
         echo "Generating installer directories for Server Duels v${version}..."
-        distDir=${SERVER_DUELS_DIR}/${version}
+        distDir=${SERVER_DUELS_DIR}/bin/${version}
     fi
 
     mkdir -p $distDir
@@ -55,6 +55,16 @@ makeControlFile(){
     printf "Maintainer: ${maintainer}\n" >> control
     printf "Architecture: ${architecture}\n" >> control
     printf "Description: ${description}\n" >> control
+}
+
+# Create a debian preinst file with the pre install script template.
+makePreinstScript(){
+    echo "Generating pre-install script..."
+    cd $debDir
+    touch preinst
+    chmod +x preinst
+
+    cat ${SERVER_DUELS_DIR}/scripts/pre_install_template.sh > preinst
 }
 
 # Populate the $packageDir/usr/local/bin directory
@@ -96,8 +106,9 @@ makeRCDir
 makeDebStructure
 makeControlFile
 populateBinDir
+makePreinstScript
 buildPackage
 cleanUp
 
-
 echo "${packageName} installer generated at ${distDir}"
+
