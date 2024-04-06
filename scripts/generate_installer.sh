@@ -4,6 +4,7 @@ version=$1
 releaseCandidateNumber=$2
 distDir=""
 packageDir=""
+packageBinDir=""
 debDir=""
 packageName=""
 
@@ -33,9 +34,10 @@ makeDebStructure(){
     fi
 
     packageDir=${distDir}/${packageName}
+    packageBinDir=${packageDir}/usr/local/bin
     debDir=${distDir}/${packageName}/DEBIAN
 
-    mkdir -p $packageDir && mkdir -p $debDir && mkdir -p ${packageDir}/usr/local/bin
+    mkdir -p $packageDir && mkdir -p $debDir && mkdir -p ${packageBinDir}
 }
 
 # Create a debian control file with package information
@@ -73,9 +75,9 @@ populateBinDir(){
 
     cd $SERVER_DUELS_DIR
 
-    cp poetry.lock ${packageDir}/usr/local/bin
-    cp pyproject.toml ${packageDir}/usr/local/bin
-    cp -r server-duels ${packageDir}/usr/local/bin
+    cp poetry.lock ${packageBinDir}
+    cp pyproject.toml ${packageBinDir}
+    cp -r server-duels ${packageBinDir}
 }
 
 # Build the deb file
