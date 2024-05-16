@@ -3,6 +3,7 @@ name = "server-duels"
 version = "0.2"
 description = "A Discord bot to duel your friends"
 authors = ["Domenic Hankle", "Victor Londono"]
+packages = [{include = "server-duels"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
