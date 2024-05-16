@@ -127,7 +127,7 @@ cleanUp(){
 if [ -z "$version" ]; then
     echo -e "You must provide a version for this installer!\n"
     echo -e "Usage:\n\n<required>\n(optional)\n"
-    echo "./package_installer.sh <version> (release canidate number)"
+    echo "./generate_installer.sh <version> (release canidate number)"
     exit -1;
 fi
 
