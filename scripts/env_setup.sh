@@ -11,6 +11,25 @@ getDependencies(){
     ./get_dependencies.sh
 }
 
+#Get user bot token and store in json file
+getBotToken(){
+	# Prompt user for their bot token
+	read -p "Enter your bot token: " token
+
+	# Create json object
+	json_data=$(jq -n --arg token "$token" \
+		'{token: $token}')
+
+	# Define output file
+	output_file="bot_token.json"
+
+	# Save the json obj to file
+	echo "$json_data" > "$output_file"
+
+	echo "Data has been saved to $output_file"
+	
+}
+
 #Append Environmental Variables used for development to .bashrc file.
 initializeEnvVars(){
 
@@ -31,6 +50,9 @@ initializeEnvVars(){
     fi
 
 }
+
+#Get user bot token and store in json
+getBotToken
 
 #Get system level dependencies (python3, pip, etc.)
 getDependencies
