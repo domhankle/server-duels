@@ -16,15 +16,24 @@ getBotToken(){
 	# Prompt user for their bot token
 	read -p "Enter your bot token: " token
 
+	# Handle errors
+	if [ -z "$token" ]; then
+		echo "You must enter a Discord Bot token to initialize a Server Duels developer environment"
+		exit 1
+	fi
+
 	# Create json object
 	json_data=$(jq -n --arg token "$token" \
 		'{token: $token}')
 
 	# Define output file
-	output_file="bot_token.json"
+	output_file="config.json"
 
 	# Save the json obj to file
 	echo "$json_data" > "$output_file"
+
+	# Move output file
+	mv "./$output_file" "$serverDuelsDirPath/$outputfile"
 
 	echo "Data has been saved to $output_file"
 	
@@ -51,11 +60,11 @@ initializeEnvVars(){
 
 }
 
+#Get system level dependencies
+getDependencies
+
 #Get user bot token and store in json
 getBotToken
-
-#Get system level dependencies (python3, pip, etc.)
-getDependencies
 
 #Initialize variables.
 initializeEnvVars
