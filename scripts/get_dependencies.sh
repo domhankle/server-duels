@@ -10,6 +10,12 @@ sudo apt install -y python3 python3-pip
 python3 --version
 pip3 --version
 
+# Install jq
+sudo apt install -y jq
+
+# Verify installation
+jq --version
+
 # pip install poetry
 pip install poetry
 
